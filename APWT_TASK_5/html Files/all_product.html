@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+    <title>All Product</title>
+</head>
+<body onload="load()">
+<div class="container">
+    <div style="text-align: center"><br>
+        <h4>Product Details</h4>
+        <small>Data from database through API</small>
+    </div>
+    <br>
+    <table class="table" id="table" style="text-align: center">
+        <tr>
+            <th>Product Name</th>
+            <th>Type</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+    </table>
+</div>
+<script>
+    function load(){
+
+        const xhttp=new XMLHttpRequest();
+        xhttp.onreadystatechange=function(){
+            if (this.readyState == 4 && this.status ==200 ){
+                var obj_arr=JSON.parse(this.responseText);
+                let table=document.querySelector('#table');
+                for (i=0; i<obj_arr.length; i++){
+
+                    let obj=obj_arr[i];
+                    let row=document.createElement('tr');
+                    let name=document.createElement('td');
+                    let type=document.createElement('td');
+                    let quantity=document.createElement('td');
+                    let price=document.createElement('td');
+
+                    name.innerHTML=obj_arr[i].p_name
+                    type.innerHTML=obj_arr[i].p_type
+                    quantity.innerHTML=obj_arr[i].p_quantity
+                    price.innerHTML=obj_arr[i].p_price
+
+
+
+                    row.appendChild(name)
+                    row.appendChild(type)
+                    row.appendChild(quantity)
+                    row.appendChild(price)
+
+                    table.appendChild(row)
+                }
+            }
+        };
+        xhttp.open("GET","http://127.0.0.1:8000/api/product/all");
+        xhttp.send();
+    }
+
+</script>
+</body>
+</html>
