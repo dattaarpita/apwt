@@ -36,6 +36,11 @@ class ProductController extends Controller
         return Product::all();
     }
 
+    public function getProduct(Request $req)
+    {
+        return Product::where ('id', $req->id)->first();
+    }
+
 
     /**
      * Show the form for creating a new resource.
