@@ -27,7 +27,7 @@ const Productlist = ()=>{
                 <tr className="table-primary">
                     <th className="table-primary">Product Name</th>
                     <th className="table-primary">Product Type</th>
-                   
+
                     <th className="table-primary">Show</th>
                 </tr>
                 {
